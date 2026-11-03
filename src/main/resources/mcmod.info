@@ -1,0 +1,12 @@
+[
+  {
+    "modid": "sodiummobile",
+    "name": "Sodium Mobile",
+    "description": "Projeto experimental de otimização para Minecraft Java 1.8.9.",
+    "version": "0.1.0",
+    "mcversion": "1.8.9",
+    "authorList": ["flayernistanhol-sys"],
+    "credits": "Projeto experimental.",
+    "url": "https://github.com/flayernistanhol-sys/SodiumMobile189"
+  }
+]
