@@ -1,5 +1,10 @@
 buildscript {
     repositories {
+        // Use the canonical Maven Central hostname; older Gradle may route
+        // mavenCentral() through repo1.maven.org, which can return HTTP 403.
+        maven {
+            url = 'https://repo.maven.apache.org/maven2'
+        }
         mavenCentral()
         maven {
             url = "https://maven.minecraftforge.net/"
