@@ -48,7 +48,7 @@ public final class ClientPerformanceMonitor {
 
             if (measuredTicks >= REPORT_EVERY_TICKS) {
                 long averageMillis = totalTickNanos / measuredTicks / 1000000L;
-                long maximumMillis = maxTickNanos / 1_000_000L;
+                long maximumMillis = maxTickNanos / 1000000L;
 
                 System.out.println(
                     "[Sodium Mobile] Diagnostico: tick medio=" + averageMillis
