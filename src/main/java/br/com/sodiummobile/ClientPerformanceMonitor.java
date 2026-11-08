@@ -5,11 +5,12 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.ChunkEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 
 /**
- * Lightweight client-side diagnostics for identifying tick stalls and
- * bursts of client chunk loading. This class measures performance; it does
- * not change vanilla chunk behavior.
+ * Lightweight client-side diagnostics for identifying tick stalls,
+ * client chunk loads and living-entity update frequency.
+ * This class measures performance; it does not change vanilla behavior.
  */
 public final class ClientPerformanceMonitor {
     private static final int REPORT_EVERY_TICKS = 200;
@@ -21,6 +22,7 @@ public final class ClientPerformanceMonitor {
     private int measuredTicks;
     private int slowTicks;
     private int clientChunksLoaded;
+    private int livingEntityUpdates;
 
     public void register() {
         FMLCommonHandler.instance().bus().register(this);
@@ -54,6 +56,7 @@ public final class ClientPerformanceMonitor {
                     "[Sodium Mobile] Diagnostico: tick medio=" + averageMillis
                     + " ms, maximo=" + maximumMillis
                     + " ms, ticks acima de 50 ms=" + slowTicks
+                    + ", atualizacoes de entidades vivas=" + livingEntityUpdates
                     + ", chunks carregados=" + clientChunksLoaded
                     + " (ultimos " + measuredTicks + " ticks)."
                 );
@@ -63,7 +66,16 @@ public final class ClientPerformanceMonitor {
                 measuredTicks = 0;
                 slowTicks = 0;
                 clientChunksLoaded = 0;
+                livingEntityUpdates = 0;
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void onLivingEntityUpdate(LivingEvent.LivingUpdateEvent event) {
+        if (event.entity != null && event.entity.worldObj != null
+                && event.entity.worldObj.isRemote) {
+            livingEntityUpdates++;
         }
     }
 
