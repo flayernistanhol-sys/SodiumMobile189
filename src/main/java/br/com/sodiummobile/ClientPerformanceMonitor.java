@@ -13,7 +13,7 @@ import net.minecraftforge.event.world.ChunkEvent;
  */
 public final class ClientPerformanceMonitor {
     private static final int REPORT_EVERY_TICKS = 200;
-    private static final long SLOW_TICK_NANOS = 50_000_000L;
+    private static final long SLOW_TICK_NANOS = 50000000L;
 
     private long tickStartNanos;
     private long totalTickNanos;
