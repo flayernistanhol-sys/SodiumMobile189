@@ -12,11 +12,12 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 public class SodiumMobile {
     public static final String MODID = "sodiummobile";
     public static final String MOD_NAME = "Sodium Mobile";
-    public static final String VERSION = "0.2.0";
+    public static final String VERSION = "0.3.0";
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         new ClientPerformanceMonitor().register();
+        new EntityRenderCulling().register();
         System.out.println("[Sodium Mobile] Mod iniciado para Minecraft 1.8.9 - v" + VERSION);
     }
 }
